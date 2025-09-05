@@ -1,4 +1,7 @@
 <?php
+
+require_once 'conf.php';
+
 $directory = [
     'Layouts',
     'Forms'
