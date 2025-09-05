@@ -1,10 +1,10 @@
 <?php
 
-class MyClass {
+class layouts {
     public function heading() {
         echo "Welcome to BBIT DevOps!";
     }
-    public function myMethod() {
+    public function welcome() {
         echo "<p>This is a new semester.</p>";
     }
     public function footer() {
