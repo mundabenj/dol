@@ -13,3 +13,11 @@ $conf['db_host'] = "localhost";
 $conf['db_user'] = "root";
 $conf['db_pass'] = "";
 $conf['db_name'] = "dol";
+
+// Email configuration
+$conf['mail_type'] = "smtp"; // Options: smtp, sendmail, mail
+$conf['smtp_host'] = "smtp.gmail.com";
+$conf['smtp_user'] = "bbitalex@gmail.com";
+$conf['smtp_pass'] = "pptj durl dksi txfn";
+$conf['smtp_port'] = 465;
+$conf['smtp_secure'] = "ssl";
