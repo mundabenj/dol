@@ -17,7 +17,7 @@ $conf['db_name'] = "dol";
 // Email configuration
 $conf['mail_type'] = "smtp"; // Options: smtp, sendmail, mail
 $conf['smtp_host'] = "smtp.gmail.com";
-$conf['smtp_user'] = "bbitalex@gmail.com";
-$conf['smtp_pass'] = "";
+$conf['smtp_user'] = "your_email@gmail.com";
+$conf['smtp_pass'] = "your_app_password";
 $conf['smtp_port'] = 465;
 $conf['smtp_secure'] = "ssl";
