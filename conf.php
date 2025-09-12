@@ -18,6 +18,6 @@ $conf['db_name'] = "dol";
 $conf['mail_type'] = "smtp"; // Options: smtp, sendmail, mail
 $conf['smtp_host'] = "smtp.gmail.com";
 $conf['smtp_user'] = "bbitalex@gmail.com";
-$conf['smtp_pass'] = "pptj durl dksi txfn";
+$conf['smtp_pass'] = "";
 $conf['smtp_port'] = 465;
 $conf['smtp_secure'] = "ssl";
