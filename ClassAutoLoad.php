@@ -4,7 +4,8 @@ require_once 'conf.php';
 $directories = [
     'Layouts',
     'Forms',
-    'Globals'
+    'Globals',
+    'Proc'
 ];
 
 spl_autoload_register(function ($className) use ($directories) {
@@ -21,3 +22,7 @@ spl_autoload_register(function ($className) use ($directories) {
 $ObjSendMail = new SendMail();
 $ObjForm = new forms();
 $ObjLayout = new layouts();
+$ObjAuth = new auth();
+
+// You can now use $ObjSendMail, $ObjForm, $ObjLayout, and $ObjAuth in your application
+$ObjAuth->signup($conf, $ObjSendMail);
