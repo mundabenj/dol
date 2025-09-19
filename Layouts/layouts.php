@@ -12,7 +12,7 @@ class layouts {
       <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
       <meta name="generator" content="Astro v5.13.2">
       <title>Jumbotron example · Bootstrap v5.3</title>
-   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+   <link href="<?php echo $conf['site_url']; ?>css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
    </head>
    <body>
       <main>
@@ -54,13 +54,31 @@ class layouts {
     }
     public function content($conf) {
 ?>
-
             <div class="row align-items-md-stretch">
                <div class="col-md-6">
                   <div class="h-100 p-5 text-bg-dark rounded-3">
                      <h2>Change the background</h2>
                      <p>Swap the background-color utility and add a `.text-*` color utility to mix up the jumbotron look. Then, mix and match with additional component themes and more.</p>
                      <button class="btn btn-outline-light" type="button">Example button</button> 
+                  </div>
+               </div>
+               <div class="col-md-6">
+                  <div class="h-100 p-5 bg-body-tertiary border rounded-3">
+                     <h2>Add borders</h2>
+                     <p>Or, keep it light and add a border for some added definition to the boundaries of your content. Be sure to look under the hood at the source HTML here as we've adjusted the alignment and sizing of both column's content for equal-height.</p>
+                     <button class="btn btn-outline-secondary" type="button">Example button</button> 
+                  </div>
+               </div>
+            </div>
+            <?php
+    }
+    public function form_content($conf, $ObjForm) {
+ 
+?>
+            <div class="row align-items-md-stretch">
+               <div class="col-md-6">
+                  <div class="h-100 p-5 text-bg-dark rounded-3">
+<?php if (basename($_SERVER['PHP_SELF']) === 'signup.php'){$ObjForm->signup();} elseif (basename($_SERVER['PHP_SELF']) === 'signin.php'){$ObjForm->signin();} ?>
                   </div>
                </div>
                <div class="col-md-6">
@@ -81,7 +99,7 @@ class layouts {
             </footer>
          </div>
       </main>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script> 
+<script src="<?php echo $conf['site_url']; ?>js/bootstrap.bundle.min.js" crossorigin="anonymous"></script> 
    </body>
 </html>
 <?php

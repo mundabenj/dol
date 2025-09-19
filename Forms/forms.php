@@ -19,7 +19,7 @@ class forms{
         <?php
     }
 
-    public function login(){
+    public function signin(){
         ?>
         <h2>Login Form</h2>
         <form action='submit_login.php' method='post'>

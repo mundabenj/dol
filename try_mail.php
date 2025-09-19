@@ -10,4 +10,6 @@ $mailCnt = [
     'body' => 'Welcome to <b>BBIT DevOps</b>! This is a new semester of learning and growth.'
 ];
 
-$ObjSendMail->Send_Mail($conf, $mailCnt);
+// $ObjSendMail->Send_Mail($conf, $mailCnt);
+
+print basename($_SERVER['PHP_SELF']);
