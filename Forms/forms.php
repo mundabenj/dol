@@ -1,33 +1,48 @@
 <?php
 class forms{
-    private function submit_button($value){
-        echo "<input type='submit' value='{$value}'>";
+    private function submit_button($value, $name){
+        ?>
+        <button type="submit" class="btn btn-primary" name="<?php echo $name; ?>"><?php echo $value; ?></button> <?php
     }
 
     public function signup(){
         ?>
         <h2>Signup Form</h2>
-        <form action='submit_signup.php' method='post'>
-            <label for='username'>Username:</label>
-            <input type='text' id='username' name='username' required><br><br>
-            <label for='email'>Email:</label>
-            <input type='email' id='email' name='email' required><br><br>
-            <label for='password'>Password:</label>
-            <input type='password' id='password' name='password' required><br><br>
-            <?php $this->submit_button('Sign Up'); ?> <a href="login.php">Already have an account? Log in</a>
-        </form>
+<form>
+  <div class="mb-3">
+    <label for="fullname" class="form-label">Fullname</label>
+    <input type="text" class="form-control" id="fullname" name="fullname" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text"></div>
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Email address</label>
+    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text"></div>
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input type="password" class="form-control" id="password" name="password">
+  </div>
+
+    <?php $this->submit_button('Sign Up', 'signup'); ?> <a href="signin.php">Already have an account? Log in</a>
+</form>
         <?php
     }
 
     public function signin(){
         ?>
-        <h2>Login Form</h2>
+        <h2>Signin Form</h2>
         <form action='submit_login.php' method='post'>
-            <label for='username'>Username:</label>
-            <input type='text' id='username' name='username' required><br><br>
-            <label for='password'>Password:</label>
-            <input type='password' id='password' name='password' required><br><br>
-            <?php $this->submit_button('Log In'); ?> <a href="index.php">Don't have an account? Sign up</a>
+  <div class="mb-3">
+    <label for="email" class="form-label">Email address</label>
+    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text"></div>
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input type="password" class="form-control" id="password" name="password">
+  </div>
+            <?php $this->submit_button('Sign In', 'signin'); ?> <a href="signup.php">Don't have an account? Sign up</a>
         </form>
         <?php
     }
