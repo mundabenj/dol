@@ -91,7 +91,6 @@ class layouts {
     }
     public function footer($conf) {
 ?>
-
             <footer class="pt-3 mt-4 text-body-secondary border-top">
                <p>Copyright &copy; <?php echo date('Y'); ?> <a href="<?php echo $conf['site_url']; ?>" class="text-body-secondary"><?php echo $conf['site_name']; ?></a> - All rights reserved.</p>
             </footer>
