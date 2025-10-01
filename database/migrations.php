@@ -60,6 +60,27 @@ if ($conn->query($sql) === TRUE) {
   echo "Error creating table: " . $conn->error;
 }
 
+// drop roles table if exists
+$sql = "DROP TABLE IF EXISTS roles";
+if ($conn->query($sql) === TRUE) {
+  echo "Table roles dropped successfully";
+} else {
+  echo "Error dropping table: " . $conn->error;
+}
+
+// create roles table
+$sql = "CREATE TABLE roles (
+id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+roleName VARCHAR(30) NOT NULL,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+)";
+
+if ($conn->query($sql) === TRUE) {
+  echo "Table roles created successfully";
+} else {
+  echo "Error creating table: " . $conn->error;
+}
 
 $conn->close();
 ?> 
