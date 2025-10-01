@@ -11,7 +11,6 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-
 // drop table if exists
 $sql = "DROP TABLE IF EXISTS MyGuests";
 if ($conn->query($sql) === TRUE) {
