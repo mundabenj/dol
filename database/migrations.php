@@ -48,3 +48,20 @@ if ($create_roles === true) {
 } else {
     echo "Error creating roles table: " . $create_roles . " | ";
 }
+
+// Drop genders table if it exists
+$drop_genders = $SQL->dropTable("genders");
+
+// Create the genders table
+$create_genders = $SQL->createTable("genders", [
+    'genderId' => 'tinyint(1) AUTO_INCREMENT PRIMARY KEY',
+    'genderName' => 'VARCHAR(20) NOT NULL UNIQUE',
+    'created' => 'TIMESTAMP DEFAULT CURRENT_TIMESTAMP',
+    'updated' => 'TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'
+]);
+
+if ($create_genders === true) {
+    echo "Genders table created successfully. | ";
+} else {
+    echo "Error creating genders table: " . $create_genders . " | ";
+}
