@@ -1,4 +1,10 @@
 <?php
+
+// Check if configuration file exists
+if (!file_exists('conf.php')) {
+    die("Configuration file not found. Please create 'conf.php' from 'conf.sample.php'.");
+}
+
 require_once 'conf.php';
 
 $directories = [
