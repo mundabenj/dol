@@ -1,64 +1,33 @@
- <?php
-$servername = "localhost";
-$username = "root";
-$password = "alex";
-$dbname = "dol";
+<?php
+require_once '../ClassAutoLoad.php';
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
+// Drop the users table if it exists
+$drop_users = $SQL->dropTable("users");
+
+if ($drop_users === true) {
+    echo "Users table dropped successfully. | ";
+} else {
+    echo "Error dropping users table: " . $drop_users . " | ";
 }
 
-// create method to create table if not exists
-function createTableIfNotExists($conn) {
-    $sql = "CREATE TABLE IF NOT EXISTS users (
-    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    firstname VARCHAR(30) NOT NULL,
-    lastname VARCHAR(30) NOT NULL,
-    email VARCHAR(50),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-    )";
+// Create the users table
+$create_users = $SQL->createTable("users", [
+    'userId' => 'BIGINT(10) AUTO_INCREMENT PRIMARY KEY',
+    'fullname' => 'VARCHAR(50) NOT NULL',
+    'email' => 'VARCHAR(50) NOT NULL UNIQUE',
+    'password' => 'VARCHAR(60) NOT NULL',
+    'verify_code' => 'VARCHAR(10) DEFAULT NULL',
+    'code_expiry_time' => 'DATETIME DEFAULT NULL',
+    'mustchange' => 'tinyint(1) DEFAULT 0',
+    'status' => "ENUM('active', 'inactive', 'suspended', 'deleted', 'Pending') DEFAULT 'Pending'",
+    'created' => 'TIMESTAMP DEFAULT CURRENT_TIMESTAMP',
+    'updated' => 'TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP',
+    'roleId' => 'tinyint(1) DEFAULT 1', // 0 = user, 1 = admin
+    'genderId' => 'tinyint(1) DEFAULT 1', // 1 = female, 2 = male
+]);
 
-    if ($conn->query($sql) === TRUE) {
-      echo "Table users created successfully or already exists.<br>";
-    } else {
-      echo "Error creating table: " . $conn->error;
-    }
-}
-
-// method to insert sample data
-function insertSampleData($conn) {
-    $sql = "INSERT INTO users (firstname, lastname, email) VALUES
-    ('John', 'Doe', 'john.doe@example.com'),
-    ('Jane', 'Smith', 'jane.smith@example.com')";
-
-  if ($conn->query($sql) === TRUE) {
-    echo "New records created successfully.<br>";
-  } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-  }
-}
-
-// method to select and display data
-function displayData($conn) {
-    $sql = "SELECT id, firstname, lastname, email FROM users";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-      // output data of each row
-      while($row = $result->fetch_assoc()) {
-        echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. " - Email: " . $row["email"]. "<br>";
-      }
-    } else {
-      echo "0 results<br>";
-    }
-}
-
-// method to close connection
-function closeConnection($conn) {
-    $conn->close();
-    echo "Connection closed.<br>";
+if ($create_users === true) {
+    echo "Users table created successfully. | ";
+} else {
+    echo "Error creating users table: " . $create_users . " | ";
 }
