@@ -11,75 +11,54 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-// drop table if exists
-$sql = "DROP TABLE IF EXISTS MyGuests";
-if ($conn->query($sql) === TRUE) {
-  echo "Table MyGuests dropped successfully";
-} else {
-  echo "Error dropping table: " . $conn->error;
+// create method to create table if not exists
+function createTableIfNotExists($conn) {
+    $sql = "CREATE TABLE IF NOT EXISTS users (
+    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    firstname VARCHAR(30) NOT NULL,
+    lastname VARCHAR(30) NOT NULL,
+    email VARCHAR(50),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    )";
+
+    if ($conn->query($sql) === TRUE) {
+      echo "Table users created successfully or already exists.<br>";
+    } else {
+      echo "Error creating table: " . $conn->error;
+    }
 }
 
-// sql to create table
-$sql = "CREATE TABLE if not exists MyGuests (
-id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-firstname VARCHAR(30) NOT NULL,
-lastname VARCHAR(30) NOT NULL,
-email VARCHAR(50),
-reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-)";
+// method to insert sample data
+function insertSampleData($conn) {
+    $sql = "INSERT INTO users (firstname, lastname, email) VALUES
+    ('John', 'Doe', 'john.doe@example.com'),
+    ('Jane', 'Smith', 'jane.smith@example.com')";
 
-if ($conn->query($sql) === TRUE) {
-  echo "Table MyGuests created successfully";
-} else {
-  echo "Error creating table: " . $conn->error;
+  if ($conn->query($sql) === TRUE) {
+    echo "New records created successfully.<br>";
+  } else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+  }
 }
 
-// drop event table if exists
-$sql = "DROP TABLE IF EXISTS events";
-if ($conn->query($sql) === TRUE) {
-  echo "Table events dropped successfully";
-} else {
-  echo "Error dropping table: " . $conn->error;
+// method to select and display data
+function displayData($conn) {
+    $sql = "SELECT id, firstname, lastname, email FROM users";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+      // output data of each row
+      while($row = $result->fetch_assoc()) {
+        echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. " - Email: " . $row["email"]. "<br>";
+      }
+    } else {
+      echo "0 results<br>";
+    }
 }
 
-// create event table
-$sql = "CREATE TABLE events (
-id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-title VARCHAR(100) NOT NULL,
-description TEXT,
-start DATETIME NOT NULL,
-end DATETIME NOT NULL,
-created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-)";
-
-// Execute query and check for errors
-if ($conn->query($sql) === TRUE) {
-  echo "Table events created successfully";
-} else {
-  echo "Error creating table: " . $conn->error;
+// method to close connection
+function closeConnection($conn) {
+    $conn->close();
+    echo "Connection closed.<br>";
 }
-
-// drop roles table if exists
-$sql = "DROP TABLE IF EXISTS roles";
-if ($conn->query($sql) === TRUE) {
-  echo "Table roles dropped successfully";
-} else {
-  echo "Error dropping table: " . $conn->error;
-}
-
-// create roles table
-$sql = "CREATE TABLE roles (
-id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-roleName VARCHAR(30) NOT NULL,
-created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-)";
-
-if ($conn->query($sql) === TRUE) {
-  echo "Table roles created successfully";
-} else {
-  echo "Error creating table: " . $conn->error;
-}
-
-$conn->close();
-?> 

@@ -1,19 +1,17 @@
- <?php
+<?php
 require_once 'ClassAutoLoad.php';
 
 // prepare user data
 $user_data = [
-    'username' => 'Alex',
-    'email' => 'Okama@example.com',
-    'password' => '123456'
+    'firstname' => 'Abel',
+    'lastname' => 'Ment',
+    'email' => 'abel.ment@example.com'
 ];
 
-// function to insert user
-$insert_user = $SQL->insert('users', $user_data);
-
-// check if insertion was successful
-if ($insert_user === TRUE) {
-    echo "User inserted successfully";
+// Insert user data into the database
+$add_user = $SQL->insert('users', $user_data);
+if ($add_user) {
+    echo "User added successfully.<br>";
 } else {
-    echo "Error inserting user";
+    echo "Error adding user.<br>" . $add_user;
 }
