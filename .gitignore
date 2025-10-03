@@ -1,6 +1,10 @@
 # ignnore all video files
 # *.mp4
 # *.avi
+# *.mkv
+
+# ignore configuration files
+conf.php
 
 # ignore all log files
 # *.log
@@ -8,5 +12,3 @@
 # ignore temporary files
 # *.tmp
 
-# ignore configuration files
-conf.php

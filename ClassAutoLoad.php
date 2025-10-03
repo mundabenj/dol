@@ -1,11 +1,11 @@
 <?php
 
 // Check if configuration file exists
-if (!file_exists('conf.php')) {
+if (!file_exists(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'conf.php')) {
     die("Configuration file not found. Please create 'conf.php' from 'conf.sample.php'.");
 }
 
-require_once 'conf.php';
+require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'conf.php';
 
 $directories = [
     'Layouts',
