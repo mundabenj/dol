@@ -1,15 +1,19 @@
-<?php
+ <?php
 require_once 'ClassAutoLoad.php';
 
-$mailCnt = [
-    'name_from' => 'Alex Okama',
-    'mail_from' => 'alex@gmail.com',
-    'name_to' => 'Mazziq Studios',
-    'mail_to' => 'mazziqstudios@gmail.com',
-    'subject' => 'Greetings from BBIT DevOps',
-    'body' => 'Welcome to <b>BBIT DevOps</b>! This is a new semester of learning and growth.'
+// prepare user data
+$user_data = [
+    'username' => 'Alex',
+    'email' => 'Okama@example.com',
+    'password' => '123456'
 ];
 
-// $ObjSendMail->Send_Mail($conf, $mailCnt);
+// function to insert user
+$insert_user = $SQL->insert('users', $user_data);
 
-print basename($_SERVER['PHP_SELF']);
+// check if insertion was successful
+if ($insert_user === TRUE) {
+    echo "User inserted successfully";
+} else {
+    echo "Error inserting user";
+}
