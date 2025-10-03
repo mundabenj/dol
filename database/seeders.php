@@ -1,20 +1,15 @@
- <?php
-$servername = "localhost";
-$username = "root";
-$password = "alex";
-$dbname = "dol";
+<?php
+require_once '../ClassAutoLoad.php';
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
+// Seeders for roles
+$roles = ['admin', 'editor', 'viewer'];
+foreach ($roles as $role) {
+    $SQL->insert('roles', ['roleName' => $role]);
 }
 
-// insert default roles into roles table
-$sql = "INSERT INTO roles (roleName) VALUES ('admin'), ('user'), ('guest')";
-if ($conn->query($sql) === TRUE) {
-  echo "Default roles inserted successfully";
-} else {
-  echo "Error inserting roles: " . $conn->error;
+// Seeders for genders
+$genders = ['female', 'male', 'prefer not to say'];
+foreach ($genders as $gender) {
+    $SQL->insert('genders', ['genderName' => $gender]);
 }
+echo "Database seeding completed. | " . date('Y-m-d H:i:s');
