@@ -31,3 +31,20 @@ if ($create_users === true) {
 } else {
     echo "Error creating users table: " . $create_users . " | ";
 }
+
+// Drop the roles table if it exists
+$drop_roles = $SQL->dropTable("roles");
+
+// Create the roles table
+$create_roles = $SQL->createTable("roles", [
+    'roleId' => 'tinyint(1) AUTO_INCREMENT PRIMARY KEY',
+    'roleName' => 'VARCHAR(20) NOT NULL UNIQUE',
+    'created' => 'TIMESTAMP DEFAULT CURRENT_TIMESTAMP',
+    'updated' => 'TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'
+]);
+
+if ($create_roles === true) {
+    echo "Roles table created successfully. | ";
+} else {
+    echo "Error creating roles table: " . $create_roles . " | ";
+}
